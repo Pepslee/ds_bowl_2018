@@ -14,7 +14,7 @@ class TDiceLoss(nn.Module):
             eps = 1e-15
             dice_target = (targets == 1).float()
             dice_output = outputs
-            intersection = (dice_output * dice_target).sum()
+            intersection = (dice_output * dice_target).sum() + eps
             union = dice_output.sum() + dice_target.sum() + eps
             loss += 1 - torch.log(2 * intersection / union)
 
@@ -36,7 +36,7 @@ class WDiceLoss(nn.Module):
         eps = 1e-15
         dice_target = (targets == 1).float()
         dice_output = outputs
-        intersection = (dice_output * dice_target).sum()
+        intersection = (dice_output * dice_target).sum() + eps
         union = dice_output.sum() + dice_target.sum() + eps
         loss += ( 1 - torch.log(2 * intersection / union) ) * self.dice_weight
 
@@ -54,7 +54,7 @@ class TSDiceLoss(nn.Module):
         eps = 1e-10
         dice_target = (targets == 1).float()
         dice_output = F.sigmoid(outputs)
-        intersection = (dice_output * dice_target).sum()
+        intersection = (dice_output * dice_target).sum() + eps
         union = dice_output.sum() + dice_target.sum() + eps
         loss += (1 - torch.log(2 * intersection / union))
 
@@ -82,7 +82,7 @@ class AVDiceLoss(nn.Module):
             eps = 1e-10
             dice_target = (targets == 1).float()
             dice_output = F.sigmoid(outputs)
-            intersection = (dice_output * dice_target).sum()
+            intersection = (dice_output * dice_target).sum() + eps
             union = dice_output.sum() + dice_target.sum() + eps
             loss += (1 - torch.log(2 * intersection / union)) * self.dice_weight
             # loss += torch.clamp(1 - torch.log(2 * intersection / union),0,100)  * self.dice_weight
@@ -101,7 +101,7 @@ class AVDiceLoss(nn.Module):
             eps = 1e-10
             dice_target = (targets == 1).float()
             dice_output = F.sigmoid(outputs)
-            intersection = (dice_output * dice_target).sum()
+            intersection = (dice_output * dice_target).sum() + eps
             union = dice_output.sum() + dice_target.sum() + eps
             loss += (1 - torch.log(2 * intersection / union)) * self.dice_weight
             loss += vector_loss
@@ -116,7 +116,7 @@ def dice_loss(preds, trues, weight=None, is_average=True):
         w = torch.autograd.Variable(weight).view(num, -1)
         preds = preds * w
         trues = trues * w
-    intersection = (preds * trues).sum(1)
+    intersection = (preds * trues).sum(1) + eps
     scores = 2. * (intersection + 1) / (preds.sum(1) + trues.sum(1) + 1)
 
     if is_average:

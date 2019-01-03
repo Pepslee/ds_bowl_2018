@@ -642,7 +642,8 @@ def train(train_loader,
                                    threshold=args.ths)
 
         # measure accuracy and record loss
-        losses.update(loss.data[0], input.size(0))
+        #losses.update(loss.data[0], input.size(0))
+        losses.update(loss.data.item(), input.size(0))
         f1_scores.update(f1_scores_batch, input.size(0))
 
         # log the current lr
