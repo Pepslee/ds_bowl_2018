@@ -759,7 +759,7 @@ def validate(val_loader,
             pred_mask_255 = np.copy(pred_mask) * 255            
 
             # read the original masks for metric evaluation
-            mask_glob = '../data/military_data/imgs/{}.*'.format(img_sample[j])
+            mask_glob = '../data/military_data/imgs/{}.tif'.format(img_sample[j])
             gt_masks = imread(mask_glob)
 
             # simple wt
