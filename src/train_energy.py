@@ -335,7 +335,7 @@ def main():
     # train loop
     else:
         # read the train df    
-        train_df = pd.read_pickle('../data/train_df_stage1_meta')
+        train_df = pd.read_csv('../data/train_df_military1_meta.csv')
         train_df = train_df.reset_index()
         
         criterion = AVDiceLoss(bce_weight=float(args.bce_weight),
@@ -759,8 +759,8 @@ def validate(val_loader,
             pred_mask_255 = np.copy(pred_mask) * 255            
 
             # read the original masks for metric evaluation
-            mask_glob = glob.glob('../data/stage1_train/{}/masks/*.png'.format(img_sample[j]))
-            gt_masks = imread_collection(mask_glob).concatenate()
+            mask_glob = '../data/military_data/imgs/{}.jpg'.format(img_sample[j])
+            gt_masks = imread(mask_glob)
 
             # simple wt
             y_pred_wt = wt_baseline(pred_mask_255, args.ths)

@@ -35,6 +35,7 @@ model_presets = {
     'unet16_16_7_dc' : [UNet16,{'num_classes':7,'is_deconv':True,'pretrained':True,'num_filters':16}], 
     'unet16_32_7_dc' : [UNet16,{'num_classes':7,'is_deconv':True,'pretrained':True,'num_filters':32}],      
     'unet16_160_7_dc' : [UNet16,{'num_classes':7,'is_deconv':True,'pretrained':True,'num_filters':160}],
+    # 'unet16_160_7_dc' : [UNet16,{'num_classes':7,'is_deconv':True,'pretrained':False,'num_filters':160}],
     'unet16_128_7_dc' : [UNet16,{'num_classes':7,'is_deconv':True,'pretrained':True,'num_filters':128}],
     
     'unet16mod_64_7_dc' : [UNet16Mod,{'num_classes':7,'is_deconv':True,'pretrained':True,'num_filters':64}],

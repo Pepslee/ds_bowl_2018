@@ -1,13 +1,10 @@
 import numpy as np
+import cv2
 
 def calculate_ap(y_pred, gt_masks):
-    height, width, num_masks = gt_masks.shape[1],gt_masks.shape[2], gt_masks.shape[0]
-    
     # Make a ground truth label image (pixel value is index of object label)
     # Note that labels will contain the background label
-    labels = np.zeros((height, width), np.uint16)
-    for index in range(0, num_masks):
-        labels[gt_masks[index] > 0] = index + 1    
+    _, labels = cv2.connectedComponents(gt_masks)
         
     # y_pred should also contain background labels
     # y_pred should contain it if it is taken from wt transform

@@ -192,8 +192,8 @@ python3 train_energy.py \
 # 6 Watershed
 
 - The model is analogous to DWT since it uses predicted energy for watershed;
-- The best performing wateshed post-processing scripts is in `utils.watershed.energy_baseline`;
-- All the other functions in `utils.watershed` performed worse;
+- The best performing wateshed post-processing scripts is in `src.utils.watershed.energy_baseline`;
+- All the other functions in `src.utils.watershed` performed worse;
 
 
 # 6 Additional notes

@@ -53,7 +53,7 @@ class TSDiceLoss(nn.Module):
         
         eps = 1e-10
         dice_target = (targets == 1).float()
-        dice_output = F.sigmoid(outputs)
+        dice_output = torch.sigmoid(outputs)
         intersection = (dice_output * dice_target).sum() + eps
         union = dice_output.sum() + dice_target.sum() + eps
         loss += (1 - torch.log(2 * intersection / union))
@@ -81,7 +81,7 @@ class AVDiceLoss(nn.Module):
 
             eps = 1e-10
             dice_target = (targets == 1).float()
-            dice_output = F.sigmoid(outputs)
+            dice_output = torch.sigmoid(outputs)
             intersection = (dice_output * dice_target).sum() + eps
             union = dice_output.sum() + dice_target.sum() + eps
             loss += (1 - torch.log(2 * intersection / union)) * self.dice_weight
@@ -100,7 +100,7 @@ class AVDiceLoss(nn.Module):
             
             eps = 1e-10
             dice_target = (targets == 1).float()
-            dice_output = F.sigmoid(outputs)
+            dice_output = torch.sigmoid(outputs)
             intersection = (dice_output * dice_target).sum() + eps
             union = dice_output.sum() + dice_target.sum() + eps
             loss += (1 - torch.log(2 * intersection / union)) * self.dice_weight
@@ -112,6 +112,7 @@ def dice_loss(preds, trues, weight=None, is_average=True):
     num = preds.size(0)
     preds = preds.view(num, -1)
     trues = trues.view(num, -1)
+    eps = 1e-15
     if weight is not None:
         w = torch.autograd.Variable(weight).view(num, -1)
         preds = preds * w
