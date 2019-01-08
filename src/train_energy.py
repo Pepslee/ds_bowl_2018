@@ -752,7 +752,7 @@ def validate(val_loader,
             # pred_distance = cv2.resize(pred_distance, (or_h,or_w), interpolation=cv2.INTER_LINEAR)
             pred_border = cv2.resize(pred_border, (or_h,or_w), interpolation=cv2.INTER_LINEAR)
             pred_vector0 = cv2.resize(pred_vector0, (or_h,or_w), interpolation=cv2.INTER_LINEAR) 
-            pred_vector1 = cv2.resize(pred_vector1, (or_h,or_w), interpolation=cv2.INTER_LINEAR)             
+            #pred_vector1 = cv2.resize(pred_vector1, (or_h,or_w), interpolation=cv2.INTER_LINEAR)
             
             # predict average energy by summing all the masks up 
             pred_energy = (pred_mask+pred_mask1+pred_mask2+pred_mask3+pred_mask0)/5*255
